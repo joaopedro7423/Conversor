@@ -1,10 +1,12 @@
 var Reader = require("./Reader");
+var Writer = require("./Writer");
 var Processor = require("./Processor");
 var Table = require("./table");
 var HtmlParser = require("./HtmlParser");
+var PDFWriter = require("./PDFWriter");
 
 var leitor = new Reader();
-
+var escritor = new Writer();
  
 
 async function main(){
@@ -17,7 +19,14 @@ async function main(){
  
     var html = await HtmlParser.Parse(usuarios);
 
-    console.log(html);
+    //console.log(html);
+
+    //salva em html
+    escritor.Write(Date.now()+".html",html);
+
+
+    //jogar no pdf
+    PDFWriter.WritePDF(Date.now()+".PDF",html);
 
     //usuarios.rows.push(["jooj","php","php","32"]);
 
